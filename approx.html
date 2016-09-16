@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="diacritics.js"></script>
+		<script src="levenshtein.js"></script>
+		<script src="script.js"></script>
+		<title>mtg approximator</title>
+	</head>
+	<body>
+		<textarea id="list" spellcheck="false" onkeypress="keypress(event)" onclick="hideDialog()"></textarea>
+		<div id="dialog" onclick="event.stopPropagation()"></div>
+	</body>
+</html>
