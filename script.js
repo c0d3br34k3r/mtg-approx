@@ -84,9 +84,7 @@ var DUMMY = {
 
 function getMatches(input) {
 	var name = input.toLowerCase();
-	for (var i = 0; i < MATCHES; i++) {
-		entries[i] = DUMMY;
-	}
+	entries.fill(DUMMY);
 	var threshold = Number.MAX_VALUE;
 	for (var i = 0, len = cards.length; i < len; i++) {
 		var distance = levenshtein(cards[i].toLowerCase(), name);
