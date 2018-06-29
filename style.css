@@ -9,6 +9,7 @@ textarea  {
 textarea {
 	resize: none;
 	padding: 4px;
+	border: 0;
 	box-sizing: border-box;
 }
 

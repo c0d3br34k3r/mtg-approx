@@ -44,8 +44,8 @@ function keypress(e) {
 	if (dialog) {
 		if (!e.shiftKey) {
 			var key = e.key.replace('Enter', '1');
-			if (/^[0-9]$/.test(key)) {
-				replaceLine(key.replace('0', '10') - 1, true);
+			if (!isNaN(key)) {
+				replaceLine(key.replace('0', '10') - 1);
 				e.preventDefault();
 			}
 		}
@@ -129,10 +129,10 @@ function hideDialog() {
 window.onload = function() {
 	document.getElementById('list').value = '';
 	document.getElementById('list').focus();
-}
+};
 
 window.onbeforeunload = function() {
 	if (document.getElementById('list').value) {
-		return 'Warning! Entered text will be lost.';
+		return 'Warning!  Entered text will be lost.';
 	}
 };
