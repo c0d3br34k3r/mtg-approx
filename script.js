@@ -107,12 +107,12 @@ function comparator(e1, e2) {
 function showDialog() {
 	dialog = true;
 	document.getElementById('dialog').style.display = 'block';
-	html = '<ol>';
+	html = ['<ol>'];
 	for (var i = 0; i < MATCHES; i++) {
-		html += ('<li onclick="selectItem(' + i + ')">' + entries[i].name + '</li>');
+		html.push('<li onclick="selectItem(' + i + ')">' + entries[i].name + '</li>');
 	}
-	html += '</ol>';
-	document.getElementById('dialog').innerHTML = html;
+	html.push('</ol>');
+	document.getElementById('dialog').innerHTML = html.join('');
 }
 
 function selectItem(index) {
