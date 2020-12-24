@@ -1,40 +1,33 @@
 var cards = [];
-var request = new XMLHttpRequest();
-request.onreadystatechange = function() {
-    if (request.readyState == 4 && request.status == 200) {
-		var mtgjson = JSON.parse(request.responseText);
-		var set = new Set();
-		for (var key of Object.keys(mtgjson)) {
-			for (card of mtgjson[key].cards) {
-				var name;
-				switch (card.layout) {
-					case 'normal':
-					case 'leveler':
-						set.add(Diacritics.remove(card.name));
-						break;
-					case 'split':
-						set.add(Diacritics.remove(card.names.join(' // ')));
-						break;
-					case 'flip':
-					case 'double-faced':
-						set.add(Diacritics.remove(card.names[0]));
-						break;
-					case 'meld':
-						set.add(Diacritics.remove(card.names[0]));
-						set.add(Diacritics.remove(card.names[1]));
-						break;
-					default:
-						break;
-				}
+
+function mtgjsoncallback (mtgjson) {
+	var set = new Set();
+	for (var key of Object.keys(mtgjson)) {
+		for (card of mtgjson[key].cards) {
+			var name;
+			switch (card.layout) {
+				case 'normal':
+				case 'leveler':
+					set.add(Diacritics.remove(card.name));
+					break;
+				case 'split':
+					set.add(Diacritics.remove(card.names.join(' // ')));
+					break;
+				case 'flip':
+				case 'double-faced':
+					set.add(Diacritics.remove(card.names[0]));
+					break;
+				case 'meld':
+					set.add(Diacritics.remove(card.names[0]));
+					set.add(Diacritics.remove(card.names[1]));
+					break;
+				default:
+					break;
 			}
 		}
-		cards = Array.from(set);
-    }
-};
-
-request.overrideMimeType('application/json');
-request.open('GET', './AllSets.json', true);
-request.send();
+	}
+	cards = Array.from(set);
+}
 
 var dialog = false;
 var lineStart;
@@ -127,8 +120,9 @@ function hideDialog() {
 }
 
 window.onload = function() {
-	document.getElementById('list').value = '';
-	document.getElementById('list').focus();
+	var list = document.getElementById('list')
+	list.value = '';
+	list.focus();
 };
 
 window.onbeforeunload = function() {
